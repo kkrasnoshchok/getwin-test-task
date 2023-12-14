@@ -16,42 +16,6 @@ module.exports = {
         jest: true
     },
     rules: {
-        '@typescript-eslint/naming-convention': [
-            'warn',
-            {
-                selector: 'default',
-                format: ['camelCase']
-            },
-            {
-                selector: 'parameter',
-                format: ['camelCase'],
-                trailingUnderscore: 'allowSingleOrDouble'
-            },
-            {
-                selector: 'class',
-                format: ['PascalCase']
-            },
-            {
-                selector: 'enum',
-                format: ['PascalCase', 'UPPER_CASE']
-            },
-            {
-                selector: 'enumMember',
-                format: ['PascalCase', 'UPPER_CASE']
-            },
-            {
-                selector: 'interface',
-                format: ['PascalCase']
-            },
-            {
-                selector: 'typeAlias',
-                format: ['PascalCase']
-            },
-            {
-                selector: 'typeParameter',
-                format: ['PascalCase']
-            }
-        ],
         'react-hooks/rules-of-hooks': 'warn',
         'react-hooks/exhaustive-deps': 'warn'
     },
