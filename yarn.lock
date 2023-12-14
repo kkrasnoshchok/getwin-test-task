@@ -7222,6 +7222,11 @@ pkg-up@^3.1.0:
   dependencies:
     find-up "^3.0.0"
 
+pokeapi-types@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/pokeapi-types/-/pokeapi-types-0.0.2.tgz#6783f1f5e8ed090e8d79be8af975219364e54126"
+  integrity sha512-yg/ZMEILjBiF6Af1lGXfSXYi5WEUUlFi6tDKxKmW6lOvdYsp1H3oNL++rKq/32Zsp6MgOig4Xltz9txYnryFpw==
+
 postcss-attribute-case-insensitive@^5.0.2:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/postcss-attribute-case-insensitive/-/postcss-attribute-case-insensitive-5.0.2.tgz#03d761b24afc04c09e757e92ff53716ae8ea2741"

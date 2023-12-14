@@ -1,3 +1,4 @@
 export const ROUTES = {
-    HOMEPAGE_ROUTE: '/'
+    POKEMONS_LIST: '/',
+    POKEMON_DETAILS: '/pokemon/:pokemonSlug'
 }

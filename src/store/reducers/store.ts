@@ -1,10 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import data from './data'
+import pokemonsListReducer from './pokemonsListReducer'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
-const rootReducer = combineReducers({
-    data
-})
+const rootReducer = combineReducers({ pokemonsListReducer })
 
 export const store = configureStore({
     reducer: rootReducer,
