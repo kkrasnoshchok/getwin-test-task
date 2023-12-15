@@ -5,7 +5,7 @@ import { fetchPokemonByName } from '../store/actions/data'
 
 const PokemonDetailsPage: React.FC = () => {
     const params = useParams<{ pokemonSlug: string }>()
-    const { pokemon, isLoading } = useAppSelector((state) => state.singlePokemonReducer)
+    const { pokemon, isLoading, error } = useAppSelector((state) => state.singlePokemonReducer)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     useEffect(() => {
@@ -18,11 +18,12 @@ const PokemonDetailsPage: React.FC = () => {
             <button onClick={() => navigate('/')}>go home</button>
             <h1 style={{ fontSize: '4em' }}>Pokemon: {params.pokemonSlug}</h1>
             {isLoading && <h1>Loading....</h1>}
-            {pokemon && !isLoading && (
+            {error && <h1>Error...</h1>}
+            {!isLoading && !error && pokemon && (
                 <div className="">
                     <div>{pokemon.name}</div>
                     {/* <pre>{JSON.stringify(pokemon.moves, null, 2)}</pre> */}
-                    <ul>{pokemon.moves.length && pokemon.moves.map((move) => <li key={move.move.name}>{move.move.name}</li>)}</ul>
+                    <ul>{pokemon.moves && pokemon.moves.length && pokemon.moves.map((move) => <li key={move.move.name}>{move.move.name}</li>)}</ul>
                 </div>
             )}
         </div>

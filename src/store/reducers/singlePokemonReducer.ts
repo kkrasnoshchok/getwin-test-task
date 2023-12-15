@@ -26,6 +26,7 @@ const singlePokemonReducer = createReducer<SinglePokemonReducer>(initialState, (
     builder.addCase(fetchPokemonByNameFailureAction, (state, action) => {
         state.isLoading = false
         state.error = action.payload
+        state.pokemon = {} as PokeAPI.Pokemon
     })
 })
 

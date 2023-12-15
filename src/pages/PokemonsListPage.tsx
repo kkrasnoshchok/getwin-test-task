@@ -31,7 +31,7 @@ const PokemonsListPage: React.FC = () => {
             <button
                 disabled={!inputValue.length}
                 onClick={() => {
-                    navigate(`/pokemon/${inputValue}`)
+                    navigate(`/pokemon/${inputValue.trim().toLowerCase()}`)
                 }}
             >
                 Search Pokemon
