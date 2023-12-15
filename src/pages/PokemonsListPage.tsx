@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../store/reducers/store'
 import { fetchData } from '../store/actions/data'
+import { useNavigate } from 'react-router-dom'
 
 const PokemonsListPage: React.FC = () => {
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const { pokemons, count, nextPageUrl, previousPageUrl, isLoading } = useAppSelector((state) => state.pokemonsListReducer)
 
@@ -21,9 +23,19 @@ const PokemonsListPage: React.FC = () => {
         dispatch(fetchData({ specPage: pageNumber > currentPage ? nextPageUrl : previousPageUrl }))
     }
 
+    const [inputValue, setInputValue] = useState('')
+
     return (
         <div>
-            <h1 style={{ fontSize: '4em' }}>Hello world!</h1>
+            <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder="search pokemon by name" />
+            <button
+                disabled={!inputValue.length}
+                onClick={() => {
+                    navigate(`/pokemon/${inputValue}`)
+                }}
+            >
+                Search Pokemon
+            </button>
             {isLoading && <p>Pokemons are loading</p>}
             {!isLoading &&
                 pokemons.map((pokemon) => (

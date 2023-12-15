@@ -10,13 +10,32 @@ export const fetchData = ({ specPage, amount = 20 }: { specPage?: string; amount
     return (dispatch: any) => {
         dispatch(fetchDataRequestAction())
         axios
-            .get(specPage ?? `https://pokeapi.co/api/v2/ability/?limit=${amount}`)
+            .get(specPage ?? `https://pokeapi.co/api/v2/pokemon/?limit=${amount}`)
             .then((response) => {
                 const data = response.data
                 dispatch(fetchDataSuccessAction(data))
             })
             .catch((error) => {
                 dispatch(fetchDataFailureAction(error.message))
+            })
+    }
+}
+
+export const fetchPokemonByNameRequestAction = createAction('singlePokemon/request')
+export const fetchPokemonByNameSuccessAction = createAction<PokeAPI.Pokemon>('singlePokemon/success')
+export const fetchPokemonByNameFailureAction = createAction<string>('singlePokemon/error')
+
+export const fetchPokemonByName = ({ name }: { name: string }) => {
+    return (dispatch: any) => {
+        dispatch(fetchPokemonByNameRequestAction())
+        axios
+            .get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+            .then((response) => {
+                const data = response.data
+                dispatch(fetchPokemonByNameSuccessAction(data))
+            })
+            .catch((error) => {
+                dispatch(fetchPokemonByNameFailureAction(error.message))
             })
     }
 }
