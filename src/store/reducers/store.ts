@@ -2,8 +2,10 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import pokemonsListReducer from './pokemonsListReducer'
 import singlePokemonReducer from './singlePokemonReducer'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import typesReducer from './typesReducer'
+import singleTypeReducer from './singleTypeReducer'
 
-const rootReducer = combineReducers({ pokemonsListReducer, singlePokemonReducer })
+const rootReducer = combineReducers({ pokemonsListReducer, singlePokemonReducer, typesReducer, singleTypeReducer })
 
 export const store = configureStore({
     reducer: rootReducer,

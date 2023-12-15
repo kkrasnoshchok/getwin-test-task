@@ -22,7 +22,14 @@ const PokemonDetailsPage: React.FC = () => {
             {!isLoading && !error && pokemon && (
                 <div className="">
                     <div>{pokemon.name}</div>
-                    {/* <pre>{JSON.stringify(pokemon.moves, null, 2)}</pre> */}
+                    <div className="">Types: </div>
+                    {pokemon.types &&
+                        pokemon.types.map(({ type }) => (
+                            <div className="" key={type.name}>
+                                {type.name}
+                            </div>
+                        ))}
+                    <div className="">Moves:</div>
                     <ul>{pokemon.moves && pokemon.moves.length && pokemon.moves.map((move) => <li key={move.move.name}>{move.move.name}</li>)}</ul>
                 </div>
             )}

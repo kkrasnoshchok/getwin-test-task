@@ -39,3 +39,41 @@ export const fetchPokemonByName = ({ name }: { name: string }) => {
             })
     }
 }
+
+export const fetchTypesRequestAction = createAction('types/request')
+export const fetchTypesSuccessAction = createAction<{ results: PokeAPI.Type[]; count: number }>('types/success')
+export const fetchTypesFailureAction = createAction<string>('types/error')
+
+export const fetchTypes = () => {
+    return (dispatch: any) => {
+        dispatch(fetchTypesRequestAction())
+        axios
+            .get('https://pokeapi.co/api/v2/type')
+            .then((response) => {
+                const data = response.data
+                dispatch(fetchTypesSuccessAction(data))
+            })
+            .catch((error) => {
+                dispatch(fetchTypesFailureAction(error.message))
+            })
+    }
+}
+
+export const fetchSingleTypeRequestAction = createAction('singleType/request')
+export const fetchSingleTypeSuccessAction = createAction<PokeAPI.Type>('singleType/success')
+export const fetchSingleTypeFailureAction = createAction<string>('singleType/error')
+
+export const fetchSingleType = ({ name }: { name: string }) => {
+    return (dispatch: any) => {
+        dispatch(fetchSingleTypeRequestAction())
+        axios
+            .get(`https://pokeapi.co/api/v2/type/${name}`)
+            .then((response) => {
+                const data = response.data
+                dispatch(fetchSingleTypeSuccessAction(data))
+            })
+            .catch((error) => {
+                dispatch(fetchSingleTypeFailureAction(error.message))
+            })
+    }
+}
