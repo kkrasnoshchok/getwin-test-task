@@ -2,15 +2,19 @@ import { createAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { PokeAPI } from 'pokeapi-types'
 
+const API_BASE_URL = 'https://pokeapi.co/api/v2'
+const POKEMON_BASE_URL = `${API_BASE_URL}/pokemon`
+const TYPE_BASE_URL = `${API_BASE_URL}/type`
+
 export const fetchDataRequestAction = createAction('pokemons/request')
 export const fetchDataSuccessAction = createAction<{ results: PokeAPI.Pokemon[]; count: number; next: string; previous: string }>('pokemons/success')
 export const fetchDataFailureAction = createAction<string>('pokemons/error')
 
-export const fetchData = ({ specPage, amount = 20 }: { specPage?: string; amount?: number }) => {
+export const fetchData = ({ page = 1, amount = 20 }: { page?: number; amount?: number }) => {
     return (dispatch: any) => {
         dispatch(fetchDataRequestAction())
         axios
-            .get(specPage ?? `https://pokeapi.co/api/v2/pokemon/?limit=${amount}`)
+            .get(`${POKEMON_BASE_URL}/?limit=${amount}?offset=${page === 1 ? 0 : page * 20}`)
             .then((response) => {
                 const data = response.data
                 dispatch(fetchDataSuccessAction(data))
@@ -29,7 +33,7 @@ export const fetchPokemonByName = ({ name }: { name: string }) => {
     return (dispatch: any) => {
         dispatch(fetchPokemonByNameRequestAction())
         axios
-            .get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+            .get(`${POKEMON_BASE_URL}/${name}`)
             .then((response) => {
                 const data = response.data
                 dispatch(fetchPokemonByNameSuccessAction(data))
@@ -48,7 +52,7 @@ export const fetchTypes = () => {
     return (dispatch: any) => {
         dispatch(fetchTypesRequestAction())
         axios
-            .get('https://pokeapi.co/api/v2/type')
+            .get(TYPE_BASE_URL)
             .then((response) => {
                 const data = response.data
                 dispatch(fetchTypesSuccessAction(data))
@@ -67,7 +71,7 @@ export const fetchSingleType = ({ name }: { name: string }) => {
     return (dispatch: any) => {
         dispatch(fetchSingleTypeRequestAction())
         axios
-            .get(`https://pokeapi.co/api/v2/type/${name}`)
+            .get(`${TYPE_BASE_URL}/${name}`)
             .then((response) => {
                 const data = response.data
                 dispatch(fetchSingleTypeSuccessAction(data))

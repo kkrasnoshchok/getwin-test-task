@@ -1,35 +1,45 @@
 import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../store/reducers/store'
 import { fetchData, fetchSingleType, fetchTypes } from '../store/actions/data'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 const PokemonsListPage: React.FC = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
-    const { pokemons, count, nextPageUrl, previousPageUrl, isLoading } = useAppSelector((state) => state.pokemonsListReducer)
+    const { pokemons, count, isLoading } = useAppSelector((state) => state.pokemonsListReducer)
     const { types, isLoading: typesLoading, error: typesError } = useAppSelector((state) => state.typesReducer)
     const { type, isLoading: singleTypeLoading, error: singleTypeError } = useAppSelector((state) => state.singleTypeReducer)
-
-    const [currentPage, setCurrentPage] = useState(1)
     const itemsPerPage = 20
 
     useEffect(() => {
-        if (!pokemons.length) {
-            dispatch(fetchData({ amount: itemsPerPage }))
-        }
         if (!types.length) {
             dispatch(fetchTypes())
         }
     }, [dispatch])
 
     // Function to handle page changes
-    const handlePageChange = (pageNumber: number) => {
-        setCurrentPage(pageNumber)
-        dispatch(fetchData({ specPage: pageNumber > currentPage ? nextPageUrl : previousPageUrl }))
-    }
 
     const [inputValue, setInputValue] = useState('')
-    const [selectValue, setSelectValue] = useState('')
+    const [searchParams, setSearchParams] = useSearchParams([['page', '1']])
+
+    useEffect(() => {
+        if (searchParams.has('type')) {
+            const typeParam = searchParams.get('type')
+            if (typeParam) {
+                dispatch(fetchSingleType({ name: typeParam }))
+            }
+        }
+        if (searchParams.has('page')) {
+            const pageParam = searchParams.get('page')
+            if (pageParam) {
+                if (Number(pageParam) <= 1) {
+                    dispatch(fetchData({}))
+                    return
+                }
+                dispatch(fetchData({ page: Number(pageParam) }))
+            }
+        }
+    }, [searchParams])
 
     return (
         <div>
@@ -45,47 +55,46 @@ const PokemonsListPage: React.FC = () => {
             <div className="">Types</div>
             {typesLoading && <h1>Types are loading</h1>}
             {typesError && <h1>Types Error: {typesError}</h1>}
-            {types.length && (
+            {type && types.length && (
                 <select
                     onChange={(e) => {
-                        setSelectValue(e.target.value)
-                        if (e.target.value !== '') {
-                            dispatch(fetchSingleType({ name: e.target.value }))
-                        }
+                        setSearchParams(e.target.value === '' ? [['page', '1']] : [['type', e.target.value]])
                     }}
-                    value={selectValue}
+                    value={searchParams.get('type') ?? ''}
                 >
-                    <option value={''} label={selectValue.length ? 'Clear Selection' : 'Please Select Value'} />
+                    <option value={''} label={searchParams.get('type') ? 'Clear Selection' : 'Please Select Value'} />
                     {types.map((type) => (
                         <option key={type.name} label={`${type.name[0].toUpperCase()}${type.name.slice(1, type.name.length)}`} value={type.name} />
                     ))}
                 </select>
             )}
             {/* Pokemons By Type List */}
-            {selectValue && (
+            {searchParams && searchParams.get('type')?.length && (
                 <>
                     {singleTypeError && <p>Single Type error</p>}
                     {singleTypeLoading && <p>Type is loading</p>}
-                    {type && (
+                    {type && !singleTypeLoading && type.pokemon && (
                         <div className="">
-                            {type.name}
-                            {/* pokemons list */}
-                            {type.pokemon.length &&
+                            {type.pokemon.length ? (
                                 type.pokemon.map(({ pokemon }) => (
                                     <div className="" key={pokemon.name}>
                                         Name {`->`} {pokemon.name}
                                     </div>
-                                ))}
+                                ))
+                            ) : (
+                                <div className="">There is no pokemon of such type</div>
+                            )}
                         </div>
                     )}
                 </>
             )}
 
             {/* Pokemons List and Pagination Component */}
-            {!selectValue && (
+            {searchParams && searchParams.get('page') && !searchParams.has('type') && (
                 <>
                     {isLoading && <p>Pokemons are loading</p>}
-                    {pokemons.length &&
+                    {pokemons &&
+                        pokemons.length &&
                         !isLoading &&
                         pokemons.map((pokemon) => (
                             <div key={pokemon.id}>
@@ -95,11 +104,20 @@ const PokemonsListPage: React.FC = () => {
 
                     {/* Pagination component */}
                     <div>
-                        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+                        <button
+                            onClick={() => setSearchParams([['page', String(Number(searchParams.get('page')) - 1)]])}
+                            disabled={!!searchParams.get('page') && Number(searchParams.get('page')) <= 1}
+                        >
                             Previous
                         </button>
-                        <span> Page {currentPage} </span>
-                        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage * itemsPerPage >= count}>
+                        <span> Page {Number(searchParams.get('page')) <= 1 ? 1 : searchParams.get('page')} </span>
+                        <button
+                            onClick={() => {
+                                const updatedPage = Number(searchParams.get('page')) < 1 ? 1 : Number(searchParams.get('page')) + 1
+                                setSearchParams([['page', String(updatedPage)]])
+                            }}
+                            disabled={!!searchParams.get('page') && Number(searchParams.get('page')) * itemsPerPage >= count}
+                        >
                             Next
                         </button>
                     </div>

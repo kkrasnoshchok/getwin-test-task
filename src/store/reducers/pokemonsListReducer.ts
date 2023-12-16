@@ -20,20 +20,6 @@ const initialState: PokemonsListReducer = {
     error: null
 }
 
-const normalisePageUrl = (url?: string) => {
-    if (!url) {
-        return ''
-    }
-    const splittedUrl = url.split('&')
-    const urlWithoutLimit = splittedUrl[0]
-    const limitNumber = Number(splittedUrl[1].split('=')[1])
-
-    if (limitNumber < 20) {
-        return `${urlWithoutLimit}&limit=20`
-    }
-    return url
-}
-
 const pokemonsListReducer = createReducer<PokemonsListReducer>(initialState, (builder) => {
     builder.addCase(fetchDataRequestAction, (state) => {
         state.isLoading = true
@@ -43,8 +29,6 @@ const pokemonsListReducer = createReducer<PokemonsListReducer>(initialState, (bu
         state.isLoading = false
         state.count = action.payload.count
         state.pokemons = action.payload.results
-        state.nextPageUrl = normalisePageUrl(action.payload.next)
-        state.previousPageUrl = normalisePageUrl(action.payload.previous) ?? ''
     })
     builder.addCase(fetchDataFailureAction, (state, action) => {
         state.isLoading = false
