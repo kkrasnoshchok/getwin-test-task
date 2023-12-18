@@ -1,5 +1,4 @@
 import React from 'react'
-import { motion } from 'framer-motion'
 import { useSearchParams } from 'react-router-dom'
 import { useAppSelector } from '../../store/reducers/store'
 import { ITEMS_PER_PAGE } from '../../resources/api-constants'
@@ -18,21 +17,15 @@ export const Pagination = () => {
 
     return (
         <div className={styles.pagination}>
-            <motion.button
+            <button
                 className={styles.paginationButton}
                 onClick={() => setSearchParams([['page', String(Number(searchParams.get('page')) - 1)]])}
                 disabled={previousPageDisabled}
-                whileHover={{
-                    scale: previousPageDisabled ? 1 : 1.05
-                }}
-                whileTap={{
-                    scale: previousPageDisabled ? 1 : 0.95
-                }}
             >
                 Попередня
-            </motion.button>
+            </button>
             <span className={styles.paginationLabel}> Сторінка {Number(searchParams.get('page')) <= 1 ? 1 : searchParams.get('page')} </span>
-            <motion.button
+            <button
                 className={styles.paginationButton}
                 onClick={() => {
                     const negativePageParam = Number(searchParams.get('page')) < 1 // in case user manually enters -1 page in page url, we set page to 1
@@ -40,15 +33,9 @@ export const Pagination = () => {
                     setSearchParams([['page', String(updatedPage)]])
                 }}
                 disabled={nextPageDisabled}
-                whileHover={{
-                    scale: nextPageDisabled ? 1 : 1.05
-                }}
-                whileTap={{
-                    scale: nextPageDisabled ? 1 : 0.95
-                }}
             >
                 Наступна
-            </motion.button>
+            </button>
         </div>
     )
 }

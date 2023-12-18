@@ -3,7 +3,8 @@
 <br />
 
 ### 🚀 Technologies used:
-- react, typescript, react-router-dom, eslint, axios, redux-toolkit, scss, testing-library
+
+-   react, typescript, react-router-dom, eslint, axios, redux-toolkit, scss
 
 ### Інструкція з розгортання локально
 

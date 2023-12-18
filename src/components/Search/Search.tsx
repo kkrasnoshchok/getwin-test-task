@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './Search.module.scss'
-import { motion } from 'framer-motion'
 
 export const Search = () => {
     const [searchValue, setSearchValue] = useState('')
@@ -18,28 +17,18 @@ export const Search = () => {
         return () => window.removeEventListener('keydown', keydownHandler)
     }, [onSubmit, searchValue])
     return (
-        <motion.div className={styles.search}>
-            <motion.h3 className={styles.searchTitle}>Знайти покемона за імʼям</motion.h3>
-            <motion.input
+        <div className={styles.search}>
+            <h3 className={styles.searchTitle}>Знайти покемона за імʼям</h3>
+            <input
                 name="pokemon-search"
                 className={styles.searchInput}
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
                 placeholder="Введіть імʼя покемона"
             />
-            <motion.button
-                className={styles.searchButton}
-                disabled={!searchValue.length}
-                onClick={onSubmit}
-                whileHover={{
-                    scale: searchValue.length ? 1.05 : 1
-                }}
-                whileTap={{
-                    scale: searchValue.length ? 0.95 : 1
-                }}
-            >
+            <button className={styles.searchButton} disabled={!searchValue.length} onClick={onSubmit}>
                 Шукати
-            </motion.button>
-        </motion.div>
+            </button>
+        </div>
     )
 }

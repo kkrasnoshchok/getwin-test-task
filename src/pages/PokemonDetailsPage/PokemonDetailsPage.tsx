@@ -1,7 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaArrowLeft } from 'react-icons/fa'
-import { motion } from 'framer-motion'
 import classNames from 'classnames'
 import styles from './PokemonDetailsPage.module.scss'
 import { API_BASE_IMAGE_URL } from '../../resources/api-constants'
@@ -12,10 +11,10 @@ export const PokemonDetailsPage = (): JSX.Element => {
     const navigate = useNavigate()
     return (
         <div className={styles.container}>
-            <motion.button className={styles.containerBackButton} onClick={() => navigate(-1)} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <button className={styles.containerBackButton} onClick={() => navigate(-1)}>
                 <FaArrowLeft size={24} color="white" />
-            </motion.button>
-            <motion.div className={styles.containerContent}>
+            </button>
+            <div className={styles.containerContent}>
                 {isLoading && <h1>Завантаження....</h1>}
                 {error && <h1>На жаль не існує покемона з таким імʼям. Будь ласка, спробуйте інакше</h1>}
                 {!isLoading && !error && pokemon && (
@@ -53,7 +52,7 @@ export const PokemonDetailsPage = (): JSX.Element => {
                         </div>
                     </div>
                 )}
-            </motion.div>
+            </div>
         </div>
     )
 }

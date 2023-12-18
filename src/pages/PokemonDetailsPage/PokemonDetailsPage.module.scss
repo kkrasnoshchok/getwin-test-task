@@ -16,6 +16,13 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        transition: all 0.3s ease;
+        &:hover {
+            scale: 1.05;
+        }
+        &:active {
+            scale: 0.95;
+        }
     }
     &Content {
         height: 100%;
