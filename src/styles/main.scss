@@ -1,4 +1,4 @@
-@import './_variables';
+@import './variables';
 @import './_mixins';
 
 * {
@@ -19,9 +19,6 @@ body {
         sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: $main-text-color;
-    background-color: $main-background-color;
-    font-size: $main-text-size;
 }
 
 code {

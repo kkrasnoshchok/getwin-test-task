@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .container {
     padding: 1rem;
     min-height: 100vh;
@@ -8,7 +10,7 @@
         left: 1rem;
         top: 1rem;
         border: none;
-        background: black;
+        background: $black;
         border-radius: 50%;
         height: 2.5rem;
         width: 2.5rem;
@@ -16,7 +18,7 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: $smooth;
         &:hover {
             scale: 1.05;
         }
@@ -44,7 +46,7 @@
 }
 
 .card {
-    border: 1px solid #888;
+    border: 1px solid $gray;
     border-radius: 1rem;
     padding: 1rem;
     &Info {
@@ -68,17 +70,17 @@
                 display: flex;
                 gap: 0.5rem;
                 &Item {
-                    border: 1px solid black;
+                    border: 1px solid $black;
                     cursor: pointer;
                     padding: 0.5rem 1rem;
                     text-transform: capitalize;
                     border-radius: 0.5rem;
                     font-weight: 700;
-                    transition: all 0.3s ease;
+                    transition: $smooth;
                     &:hover {
-                        background-color: black;
-                        color: white;
-                        border-color: white;
+                        background-color: $black;
+                        color: $white;
+                        border-color: $white;
                         scale: 1.05;
                     }
                 }
@@ -94,7 +96,7 @@
 
                 &Item {
                     padding: 0.25rem 0.5rem;
-                    border: 1px solid #888;
+                    border: 1px solid $gray;
                     border-radius: 0.25rem;
                 }
             }

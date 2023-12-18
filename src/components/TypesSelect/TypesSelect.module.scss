@@ -1,4 +1,4 @@
-/* TypesSelect.module.scss */
+@import '../../styles/variables';
 
 .container {
     &Title {
@@ -13,10 +13,10 @@
 .selectedTypeButton {
     cursor: pointer;
     padding: 0.5rem;
-    border: 1.5px solid gray;
+    border: 1.5px solid $gray;
     border-radius: 0.5rem;
     width: 100%;
-    background-color: #fff;
+    background-color: $white;
     text-align: left;
     outline: none;
     text-transform: capitalize;
@@ -25,12 +25,12 @@
     align-items: center;
 
     &Label {
-        background-color: #fff;
+        background-color: $white;
         border: none;
     }
     &Cross {
         cursor: pointer;
-        background-color: #fff;
+        background-color: $white;
         border: none;
         padding: none;
         margin: 0;
@@ -48,9 +48,9 @@
     left: 0;
     width: 100%;
     z-index: 10;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ccc;
+    background-color: $white;
+    box-shadow: 0 4px 8px $silver;
+    border: 1px solid $gray;
     border-radius: 0.5rem;
     height: 20rem;
     overflow-y: scroll;
@@ -64,5 +64,5 @@
 }
 
 .typeList li:hover {
-    background-color: #f0f0f0;
+    background-color: $silver;
 }

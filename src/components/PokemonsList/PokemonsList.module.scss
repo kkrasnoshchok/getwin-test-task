@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .container {
     flex: 1;
     display: flex;
@@ -7,12 +9,12 @@
 }
 
 .error {
-    color: #ff0000; /* Red */
+    color: $red; /* Red */
     font-weight: bold;
 }
 
 .loading {
-    color: #0066cc; /* Blue */
+    color: $blue; /* Blue */
 }
 
 .pokemonsList {

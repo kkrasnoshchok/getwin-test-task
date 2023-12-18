@@ -1,18 +1,20 @@
+@import '../../styles/variables';
+
 .item {
     cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid #5a5959;
+    border: 1px solid $gray;
     padding: 0.5rem;
     border-radius: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px $silver;
     text-transform: capitalize;
     transition: all 0.2s ease-in-out;
     &:hover {
         scale: 1.02;
-        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0px 10px 10px $gray;
     }
     &:active {
         scale: 0.98;
