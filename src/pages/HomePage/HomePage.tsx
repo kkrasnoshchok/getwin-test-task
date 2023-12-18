@@ -8,7 +8,7 @@ import { Pagination } from '../../components/Pagination'
 export const HomePage = (): JSX.Element => {
     return (
         <div className={styles.page}>
-            <h1>Дослідник покемонів</h1>
+            <h1 className={styles.pageTitle}>Дослідник покемонів</h1>
             {/* Controls Container */}
             <div className={styles.pageControls}>
                 <Pagination />

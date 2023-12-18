@@ -23,7 +23,7 @@ export const TypesSelect = () => {
 
     return (
         <div className={styles.container}>
-            <h3 className={styles.containerTitle}>Знайти покемона за імʼям</h3>
+            <h3 className={styles.containerTitle}>Сортувати покемонів за типом</h3>
             <div className=""></div>
             {isLoading && <h1>Types are loading</h1>}
             {error && <h1>Types Error: {error}</h1>}

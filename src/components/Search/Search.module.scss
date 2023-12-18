@@ -1,6 +1,10 @@
 @import '../../styles/variables';
+@import '../../styles/mixins';
 
 .search {
+    @include breakpoint('<phone') {
+        width: 100%;
+    }
     gap: 0.25rem;
     &Title {
         margin-bottom: 0.5rem;

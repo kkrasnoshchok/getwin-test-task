@@ -1,4 +1,5 @@
 @import '../../styles/variables';
+@import '../../styles/mixins';
 
 .container {
     padding: 1rem;
@@ -32,6 +33,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        @include breakpoint('<tablet') {
+            width: 75%;
+        }
+        @include breakpoint('<phone') {
+            margin-top: 2rem;
+            width: 90%;
+        }
     }
 }
 
@@ -40,8 +48,6 @@
     &Card {
         margin-top: 1rem;
         width: 100%;
-        display: flex;
-        flex-direction: row;
     }
 }
 
@@ -49,8 +55,19 @@
     border: 1px solid $gray;
     border-radius: 1rem;
     padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    @include breakpoint('<phone') {
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+    }
     &Info {
         flex: 1;
+        @include breakpoint('<phone') {
+            justify-self: flex-start;
+            align-self: flex-start;
+        }
         &Label {
             font-weight: 400;
         }

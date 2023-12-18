@@ -1,6 +1,12 @@
 @import '../../styles/variables';
+@import '../../styles/mixins';
 
 .container {
+    @include breakpoint('<phone') {
+        width: 100%;
+        max-width: 18.5rem;
+    }
+
     &Title {
         margin-bottom: 0.5rem;
     }

@@ -18,8 +18,8 @@ export const PokemonDetailsPage = (): JSX.Element => {
                 {isLoading && <h1>Завантаження....</h1>}
                 {error && <h1>На жаль не існує покемона з таким імʼям. Будь ласка, спробуйте інакше</h1>}
                 {!isLoading && !error && pokemon && (
-                    <div style={{ width: '100%' }}>
-                        <div className={classNames([styles.contentCard, styles.card])}>
+                    <div className={styles.contentCard}>
+                        <div className={styles.card}>
                             <div className={styles.cardInfo}>
                                 <div className={styles.cardInfoName}>
                                     <h3 className={styles.cardInfoLabel}>Name: </h3>
