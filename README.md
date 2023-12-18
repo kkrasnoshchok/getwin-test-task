@@ -22,6 +22,6 @@ yarn start
 
 ### Deploy Link
 
-[Vercel Deploy Link]()
+[Vercel Deploy Link](https://getwin-test-task-technoloverbaby.vercel.app/?page=1)
 
 <br />
