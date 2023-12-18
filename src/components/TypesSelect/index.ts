@@ -1,0 +1,1 @@
+export { TypesSelect } from './TypesSelect'

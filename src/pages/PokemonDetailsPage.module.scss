@@ -1,0 +1,96 @@
+.container {
+    padding: 1rem;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    &BackButton {
+        position: absolute;
+        left: 1rem;
+        top: 1rem;
+        border: none;
+        background: black;
+        border-radius: 50%;
+        height: 2.5rem;
+        width: 2.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    &Content {
+        height: 100%;
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.content {
+    width: 100%;
+    &Card {
+        margin-top: 1rem;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.card {
+    border: 1px solid #888;
+    border-radius: 1rem;
+    padding: 1rem;
+    &Info {
+        flex: 1;
+        &Label {
+            font-weight: 400;
+        }
+        &Name {
+            display: flex;
+            text-transform: capitalize;
+
+            &Value {
+                margin-left: 0.5rem;
+                font-weight: 700;
+            }
+        }
+        &Types {
+            margin-top: 0.5rem;
+            &Grid {
+                margin-top: 0.25rem;
+                display: flex;
+                gap: 0.5rem;
+                &Item {
+                    border: 1px solid black;
+                    cursor: pointer;
+                    padding: 0.5rem 1rem;
+                    text-transform: capitalize;
+                    border-radius: 0.5rem;
+                    font-weight: 700;
+                    transition: all 0.3s ease;
+                    &:hover {
+                        background-color: black;
+                        color: white;
+                        border-color: white;
+                        scale: 1.05;
+                    }
+                }
+            }
+        }
+        &Moves {
+            margin-top: 2rem;
+            &Grid {
+                margin-top: 1rem;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+                gap: 0.5rem;
+
+                &Item {
+                    padding: 0.25rem 0.5rem;
+                    border: 1px solid #888;
+                    border-radius: 0.25rem;
+                }
+            }
+        }
+    }
+}

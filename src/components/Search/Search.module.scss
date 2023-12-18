@@ -1,0 +1,29 @@
+.search {
+
+    gap: 0.25rem;
+    &Title {
+        margin-bottom: 0.5rem;
+    }
+    &Input {
+        padding: 0.5rem;
+        border: 1.5px solid gray;
+        border-radius: 0.5rem;
+        &:focus {
+            border-color: black;
+        }
+    }
+    &Button {
+        display: inline-block;
+        margin-left: 0.5rem;
+        background: black;
+        color: white;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        border: none;
+        cursor: pointer;
+        &:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+    }
+}

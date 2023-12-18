@@ -1,20 +1,17 @@
 import { createAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { PokeAPI } from 'pokeapi-types'
-
-const API_BASE_URL = 'https://pokeapi.co/api/v2'
-const POKEMON_BASE_URL = `${API_BASE_URL}/pokemon`
-const TYPE_BASE_URL = `${API_BASE_URL}/type`
+import { ITEMS_PER_PAGE, POKEMON_BASE_URL, TYPE_BASE_URL } from '../../resources/api-constants'
 
 export const fetchDataRequestAction = createAction('pokemons/request')
-export const fetchDataSuccessAction = createAction<{ results: PokeAPI.Pokemon[]; count: number; next: string; previous: string }>('pokemons/success')
+export const fetchDataSuccessAction = createAction<PokeAPI.NamedAPIResourceList>('pokemons/success')
 export const fetchDataFailureAction = createAction<string>('pokemons/error')
 
-export const fetchData = ({ page = 1, amount = 20 }: { page?: number; amount?: number }) => {
+export const fetchData = ({ page = 1, amount = ITEMS_PER_PAGE }: { page?: number; amount?: number }) => {
     return (dispatch: any) => {
         dispatch(fetchDataRequestAction())
         axios
-            .get(`${POKEMON_BASE_URL}/?limit=${amount}?offset=${page === 1 ? 0 : page * 20}`)
+            .get(`${POKEMON_BASE_URL}/?limit=${amount}&offset=${page === 1 ? 0 : page * 20}`)
             .then((response) => {
                 const data = response.data
                 dispatch(fetchDataSuccessAction(data))

@@ -1,0 +1,68 @@
+/* TypesSelect.module.scss */
+
+.container {
+    &Title {
+        margin-bottom: 0.5rem;
+    }
+}
+
+.selectContainer {
+    position: relative;
+}
+
+.selectedTypeButton {
+    cursor: pointer;
+    padding: 0.5rem;
+    border: 1.5px solid gray;
+    border-radius: 0.5rem;
+    width: 100%;
+    background-color: #fff;
+    text-align: left;
+    outline: none;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &Label {
+        background-color: #fff;
+        border: none;
+    }
+    &Cross {
+        cursor: pointer;
+        background-color: #fff;
+        border: none;
+        padding: none;
+        margin: 0;
+        height: 1rem;
+        width: 1rem;
+    }
+}
+
+.typeList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 125%;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    height: 20rem;
+    overflow-y: scroll;
+}
+
+.typeList li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: capitalize;
+}
+
+.typeList li:hover {
+    background-color: #f0f0f0;
+}

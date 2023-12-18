@@ -3,10 +3,8 @@ import { PokeAPI } from 'pokeapi-types'
 import { fetchDataFailureAction, fetchDataRequestAction, fetchDataSuccessAction } from '../actions/data'
 
 type PokemonsListReducer = {
-    pokemons: PokeAPI.Pokemon[]
+    pokemons: PokeAPI.NamedAPIResource[]
     count: number
-    nextPageUrl: string
-    previousPageUrl: string
     isLoading: boolean
     error: string | null
 }
@@ -14,8 +12,6 @@ type PokemonsListReducer = {
 const initialState: PokemonsListReducer = {
     pokemons: [],
     count: 0,
-    nextPageUrl: '',
-    previousPageUrl: '',
     isLoading: false,
     error: null
 }
