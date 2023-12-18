@@ -5,18 +5,15 @@ import { ROUTES } from '../resources/routes-constants'
 const NotFoundPage: React.FC = () => {
     const navigate = useNavigate()
 
-    /**
-     * Call this function to redirect the user to the homepage.
-     */
     const redirectToHomePage = () => {
         navigate(ROUTES.POKEMONS_LIST)
     }
 
     return (
         <div style={{ position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-            <h1 style={{ fontSize: '4em' }}>Oops 404!</h1>
+            <h1 style={{ fontSize: '4em' }}>Йой 404!</h1>
             <span style={{ cursor: 'pointer' }} onClick={() => redirectToHomePage()}>
-                Homepage
+                Повернутись на головну сторінку
             </span>
         </div>
     )

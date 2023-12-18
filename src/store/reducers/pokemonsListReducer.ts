@@ -1,8 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit'
 import { PokeAPI } from 'pokeapi-types'
-import { fetchDataFailureAction, fetchDataRequestAction, fetchDataSuccessAction } from '../actions/data'
+import { fetchPokemonsFailureAction, fetchPokemonsRequestAction, fetchPokemonsSuccessAction } from '../actions/actionCreators'
 
-type PokemonsListReducer = {
+export type PokemonsListReducer = {
     pokemons: PokeAPI.NamedAPIResource[]
     count: number
     isLoading: boolean
@@ -17,16 +17,16 @@ const initialState: PokemonsListReducer = {
 }
 
 const pokemonsListReducer = createReducer<PokemonsListReducer>(initialState, (builder) => {
-    builder.addCase(fetchDataRequestAction, (state) => {
+    builder.addCase(fetchPokemonsRequestAction, (state) => {
         state.isLoading = true
         state.error = null
     })
-    builder.addCase(fetchDataSuccessAction, (state, action) => {
+    builder.addCase(fetchPokemonsSuccessAction, (state, action) => {
         state.isLoading = false
         state.count = action.payload.count
         state.pokemons = action.payload.results
     })
-    builder.addCase(fetchDataFailureAction, (state, action) => {
+    builder.addCase(fetchPokemonsFailureAction, (state, action) => {
         state.isLoading = false
         state.error = action.payload
     })

@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../../store/reducers/store'
-import { fetchTypes } from '../../store/actions/data'
+import React, { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import styles from './TypesSelect.module.scss'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ImCross } from 'react-icons/im'
+import { useTypesData } from '../../utils/hooks/useTypesData'
 
 export const TypesSelect = () => {
-    const dispatch = useAppDispatch()
-    const { types, isLoading, error } = useAppSelector((state) => state.typesReducer)
+    const { types, isLoading, error } = useTypesData()
     const [searchParams, setSearchParams] = useSearchParams()
 
     const [isOpen, setIsOpen] = useState(false)
@@ -23,12 +21,6 @@ export const TypesSelect = () => {
         setSearchParams(type === '' ? [['page', '1']] : [['type', type]])
         setIsOpen(false)
     }
-
-    useEffect(() => {
-        if (!types.length) {
-            dispatch(fetchTypes())
-        }
-    }, [dispatch, types.length])
 
     return (
         <div className={styles.container}>

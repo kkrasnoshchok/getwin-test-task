@@ -1,22 +1,15 @@
-import React, { useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../store/reducers/store'
-import { fetchPokemonByName } from '../store/actions/data'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FaArrowLeft } from 'react-icons/fa'
-import { easeInOut, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import styles from './PokemonDetailsPage.module.scss'
 import classNames from 'classnames'
+import { API_BASE_IMAGE_URL } from '../resources/api-constants'
+import { usePokemonDetails } from '../utils/hooks/usePokemonDetails'
 
-const PokemonDetailsPage: React.FC = () => {
-    const params = useParams<{ pokemonSlug: string }>()
-    const { pokemon, isLoading, error } = useAppSelector((state) => state.singlePokemonReducer)
+const PokemonDetailsPage = (): JSX.Element => {
+    const { pokemon, isLoading, error } = usePokemonDetails()
     const navigate = useNavigate()
-    const dispatch = useAppDispatch()
-    useEffect(() => {
-        if (params && params.pokemonSlug) {
-            dispatch(fetchPokemonByName({ name: params.pokemonSlug }))
-        }
-    }, [dispatch, params])
     return (
         <div className={styles.container}>
             <motion.button className={styles.containerBackButton} onClick={() => navigate(-1)} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -26,7 +19,7 @@ const PokemonDetailsPage: React.FC = () => {
                 {isLoading && <h1>Завантаження....</h1>}
                 {error && <h1>На жаль не існує покемона з таким імʼям. Будь ласка, спробуйте інакше</h1>}
                 {!isLoading && !error && pokemon && (
-                    <div style={{width: '100%'}}>
+                    <div style={{ width: '100%' }}>
                         <div className={classNames([styles.contentCard, styles.card])}>
                             <div className={styles.cardInfo}>
                                 <div className={styles.cardInfoName}>
@@ -45,15 +38,15 @@ const PokemonDetailsPage: React.FC = () => {
                                     </div>
                                 </div>
                             </div>
-                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`} height={200} width={200} />
+                            <img src={`${API_BASE_IMAGE_URL}/${pokemon.id}.png`} height={200} width={200} />
                         </div>
                         <div className={styles.cardInfoMoves}>
                             <h3 className={styles.cardInfoLabel}>Moves:</h3>
                             <div className={styles.cardInfoMovesGrid}>
                                 {'moves' in pokemon &&
-                                    pokemon.moves.map((move) => (
-                                        <div className={styles.cardInfoMovesGridItem} key={move.move.name}>
-                                            {move.move.name}
+                                    pokemon.moves.map(({ move }) => (
+                                        <div className={styles.cardInfoMovesGridItem} key={move.name}>
+                                            {move.name}
                                         </div>
                                     ))}
                             </div>

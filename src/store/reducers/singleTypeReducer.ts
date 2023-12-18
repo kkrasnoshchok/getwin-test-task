@@ -1,8 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit'
 import { PokeAPI } from 'pokeapi-types'
-import { fetchSingleTypeRequestAction, fetchSingleTypeSuccessAction, fetchSingleTypeFailureAction } from '../actions/data'
+import { fetchSingleTypeRequestAction, fetchSingleTypeSuccessAction, fetchSingleTypeFailureAction } from '../actions/actionCreators'
 
-type SingleTypeReducer = {
+export type SingleTypeReducer = {
     type: PokeAPI.Type
     isLoading: boolean
     error: string | null

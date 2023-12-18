@@ -1,20 +1,20 @@
 import { createReducer } from '@reduxjs/toolkit'
 import { PokeAPI } from 'pokeapi-types'
-import { fetchTypesRequestAction, fetchTypesSuccessAction, fetchTypesFailureAction } from '../actions/data'
+import { fetchTypesRequestAction, fetchTypesSuccessAction, fetchTypesFailureAction } from '../actions/actionCreators'
 
-type typesReducer = {
-    types: PokeAPI.Type[]
+export type TypesReducer = {
+    types: PokeAPI.NamedAPIResource[]
     isLoading: boolean
     error: string | null
 }
 
-const initialState: typesReducer = {
+const initialState: TypesReducer = {
     types: [],
     isLoading: false,
     error: null
 }
 
-const typesReducer = createReducer<typesReducer>(initialState, (builder) => {
+const typesReducer = createReducer<TypesReducer>(initialState, (builder) => {
     builder.addCase(fetchTypesRequestAction, (state) => {
         state.isLoading = true
         state.error = null
