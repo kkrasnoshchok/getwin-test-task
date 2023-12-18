@@ -1,8 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ROUTES } from '../resources/routes-constants'
+import { ROUTES } from '../../resources/routes-constants'
 
-const NotFoundPage: React.FC = () => {
+export const NotFoundPage = (): JSX.Element => {
     const navigate = useNavigate()
 
     const redirectToHomePage = () => {
@@ -18,5 +18,3 @@ const NotFoundPage: React.FC = () => {
         </div>
     )
 }
-
-export default NotFoundPage

@@ -2,12 +2,12 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaArrowLeft } from 'react-icons/fa'
 import { motion } from 'framer-motion'
-import styles from './PokemonDetailsPage.module.scss'
 import classNames from 'classnames'
-import { API_BASE_IMAGE_URL } from '../resources/api-constants'
-import { usePokemonDetails } from '../utils/hooks/usePokemonDetails'
+import styles from './PokemonDetailsPage.module.scss'
+import { API_BASE_IMAGE_URL } from '../../resources/api-constants'
+import { usePokemonDetails } from '../../utils/hooks/usePokemonDetails'
 
-const PokemonDetailsPage = (): JSX.Element => {
+export const PokemonDetailsPage = (): JSX.Element => {
     const { pokemon, isLoading, error } = usePokemonDetails()
     const navigate = useNavigate()
     return (
@@ -57,5 +57,3 @@ const PokemonDetailsPage = (): JSX.Element => {
         </div>
     )
 }
-
-export default PokemonDetailsPage
